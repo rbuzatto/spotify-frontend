@@ -1,8 +1,23 @@
 import React, { Component } from 'react'
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 
 import './App.css'
 
 import Form from './components/Form'
+import NavBar from './components/NavBar'
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      light: "#7986cb",
+      main: "#4c4949",
+      dark: "#303f9f",
+    },
+  },
+  typography: {
+    useNextVariants: true,
+  },
+})
 
 class App extends Component {
 
@@ -40,9 +55,12 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <Form />
-      </div>
+      <MuiThemeProvider theme={theme}>
+        <div className="App">
+          <NavBar />
+          <Form />
+        </div>
+      </MuiThemeProvider>
     )
   }
 }
