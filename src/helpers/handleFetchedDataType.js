@@ -13,19 +13,21 @@ const popularityChecker = pop => {
 }
 
 const handleFetchedDataType = (data, type) => {
-
+    const payload = { data: {}, type }
+    
     switch (type) {
         case 'album':
-            return data.albums.items.map((album) => ({
+            payload.data =  data.albums.items.map((album) => ({
                 name        : album.name,
                 id          : album.id,
                 image       : album.images.length ? album.images[0].url   : null,
-                artists     : album.artists.length > 1 ? 'Various Artists': album.artists[0],
+                artist     : album.artists.length > 1 ? 'Various Artists': album.artists[0].name,
                 availability: album.available_markets.includes('BR')
 
             }))
+                return payload
         case 'artist':
-        return data.artists.items.map((artist) => ({
+        payload.data =  data.artists.items.map((artist) => ({
             name      : artist.name,
             id        : artist.id,
             image     : artist.images.length ? artist.images[0].url: null,
@@ -33,8 +35,9 @@ const handleFetchedDataType = (data, type) => {
             genres    : artist.genres.join(', ')
 
         }))
+            return payload
         case 'track':
-        return data.tracks.items.map((track) => ({
+        payload.data =  data.tracks.items.map((track) => ({
             name    : track.name,
             id      : track.id,
             duration: track.duration_ms,
@@ -42,6 +45,7 @@ const handleFetchedDataType = (data, type) => {
             artists : track.artists.map( o => o.name).join(', ')
 
         }))
+            return payload
         default:
             return null
     }

@@ -17,7 +17,7 @@ const getData = (state = INITIAL_STATE, {type, payload}) => {
         case REQUEST_PENDING:
             return { ...state, isPending: true }
         case REQUEST_SUCCESS:
-            return { ...state, data: payload, isPending: false }
+            return { ...state, data: payload.data, type: payload.type, isPending: false }
         case REQUEST_FAILED:
             return { ...state, error: payload, isPending: false }
         default:

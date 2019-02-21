@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import { connect } from 'react-redux'
 
-import './App.css'
+import './App.scss'
 
 import Form from './components/Form'
 import NavBar from './components/NavBar'
+import ItemDisplay from './components/ItemDisplay'
 
 const theme = createMuiTheme({
   palette: {
@@ -54,18 +56,27 @@ class App extends Component {
   }
 
   render() {
+
+    const {data, type} = this.props
+
     return (
       <MuiThemeProvider theme={theme}>
         <div className="App">
           <NavBar />
           <Form />
+          { data &&  <ItemDisplay data={data[0]} type={type} /> }
         </div>
       </MuiThemeProvider>
     )
   }
 }
 
-export default App
+const mapStateToProps = state => ({
+  data : state.data.data,
+  type: state.data.type
+})
+
+export default connect(mapStateToProps, null)(App)
 
 // albums
 // album - albums.items array {found albums}

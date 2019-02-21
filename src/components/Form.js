@@ -11,11 +11,16 @@ const Form = ({handleChange, checkedValue, filter, handleSeachField, handleSubmi
     return (
     <form action="" onSubmit={(e) => handleSubmit(e, passProps())}>
         <input type="text" onChange={handleSeachField} />
-        {
-            types.map((op, idx) => (
-                <input key={idx} type="radio" id={op} value={op} name="type" checked={op === checkedValue} onChange={handleChange} />
-            ))
-        }
+            <div className='search__group'>
+                {
+                    types.map((op, idx) => (
+                        <div key={idx}>
+                            <input type="radio" className='search__input' id={op} value={op} name="type" checked={op === checkedValue} onChange={handleChange} />
+                            <label htmlFor={op} className='search__option' >{op}</label>
+                        </div>
+                    ))
+                }
+            </div>
         <button type="submit">Submit</button>
     </form>
     )
