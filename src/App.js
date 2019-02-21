@@ -34,7 +34,7 @@ class App extends Component {
     // this.fetchApi()
     fetch('http://localhost:4000')
       .then(res => res.json())
-      .then(({ token }) => this.setState(() => ({ token })))
+      .then(({ token }) => localStorage.setItem('token', token))
       .catch(err => console.log(err))
   }
 

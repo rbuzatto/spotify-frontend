@@ -1,7 +1,8 @@
 const popularityChecker = pop => {
-    switch (pop) {
+
+    switch (true) {
         case pop >= 80:
-            return 'hot'    
+            return 'hot' 
         case pop >= 60:
             return 'cool'    
         case pop >= 30:
@@ -11,31 +12,34 @@ const popularityChecker = pop => {
     }
 }
 
-const handleFetchedDataType = data => {
+const handleFetchedDataType = (data, type) => {
 
-    switch (data) {
-        case data.albums:
+    switch (type) {
+        case 'album':
             return data.albums.items.map((album) => ({
-                name: album.name,
-                image: album.images[0].url,
-                artists: album.artists.length > 1 ? 'Various Artists' : album.artists[0],
-                availability: album.available_markets.contains('BR')
+                name        : album.name,
+                id          : album.id,
+                image       : album.images.length ? album.images[0].url   : null,
+                artists     : album.artists.length > 1 ? 'Various Artists': album.artists[0],
+                availability: album.available_markets.includes('BR')
 
             }))
-        case data.artists:
+        case 'artist':
         return data.artists.items.map((artist) => ({
-            name: artist.name,
-            image: artist.images[0].url,
+            name      : artist.name,
+            id        : artist.id,
+            image     : artist.images.length ? artist.images[0].url: null,
             popularity: popularityChecker(artist.popularity),
-            genres: artist.genres.join(', ')
+            genres    : artist.genres.join(', ')
 
         }))
-        case data.tracks:
+        case 'track':
         return data.tracks.items.map((track) => ({
-            name: track.name,
-            duration: track.duration,
-            album: track.album.name,
-            artists: track.artists.map( o => o.name)
+            name    : track.name,
+            id      : track.id,
+            duration: track.duration_ms,
+            album   : track.album.name,
+            artists : track.artists.map( o => o.name).join(', ')
 
         }))
         default:

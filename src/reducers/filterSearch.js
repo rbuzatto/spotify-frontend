@@ -12,7 +12,7 @@ const filterSearch = (state = INITIAL_STATE, { type, payload }) => {
             }
             return { ...state, type: payload }
         case SEARCH_TEXT:
-            return { ... state, name: payload }
+            return { ...state, name: payload }
         default:
             return state
     }
