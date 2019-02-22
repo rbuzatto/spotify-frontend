@@ -4,9 +4,9 @@ import { connect } from 'react-redux'
 
 import './App.scss'
 
-import Form from './components/Form'
-import NavBar from './components/NavBar'
-import ItemDisplay from './components/ItemDisplay'
+import Form       from './components/Form'
+import NavBar     from './components/NavBar'
+import TableItems from './components/TableItems'
 
 const theme = createMuiTheme({
   palette: {
@@ -27,28 +27,8 @@ class App extends Component {
     token: null
   }
 
-
-  fetchApi = () => {
-    let url = new URL('https://api.spotify.com/v1/search?q=spice+world&type=album')
-    // let params = new 
-
-    const headers = new Headers({"Content-Type": "application/json", "Authorization": "Bearer BQCg5plDpteNwIoXQi8QAY531WbRycSLEfsdRmPEG87pTEbM035P5GYhpTHYP5X3ay-J0xhMyxZATCL5jKh7Hu19eQOKq8ih_-_8Uqt5pvmBf1iBmhfE16Z5an1kZQlvkI1WM8r1xVJu"})
-
-    const settings = {
-      method: 'GET',
-      headers
-    }
-
-    const request = new Request(url, settings)
-
-
-    fetch(request)
-      .then(res => res.json())
-      .then(data => console.log(data.albums.items[0]))
-  }
-
   componentDidMount() {
-    // this.fetchApi()
+    
     fetch('http://localhost:4000')
       .then(res => res.json())
       .then(({ token }) => localStorage.setItem('token', token))
@@ -64,7 +44,7 @@ class App extends Component {
         <div className="App">
           <NavBar />
           <Form />
-          { data &&  <ItemDisplay data={data[0]} type={type} /> }
+          { data &&  <TableItems /> }
         </div>
       </MuiThemeProvider>
     )
