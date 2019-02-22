@@ -5,32 +5,21 @@ import PropTypes from 'prop-types'
 import TableCell from '@material-ui/core/TableCell'
 import TableRow from '@material-ui/core/TableRow'
 
-import createRequestObject from '../helpers/createRequestObj'
+const Artist = ({data, handleDetails }) => {
+    
+    const { name, image, genres, popularity } = data
 
-function fetchArtistLastAlbums(id) {
-
-    const request = createRequestObject({ 
+    const config = {
+        id: data.id,
         qParams: {
             limit: 5,
         },
         mainRoute: 'artists',
         secondRoute: 'albums',
-        id 
-    })
-
-    fetch(request)
-        .then(res => res.json())
-        .then(data => console.log(data))
-}
-
-
-
-const Artist = ({data}) => {
-    
-    const { name, image, genres, popularity } = data 
+    }
 
     return (
-    <TableRow onClick={() => fetchArtistLastAlbums(data.id)}>
+    <TableRow onClick={() => handleDetails(config)}>
         <TableCell  component="th" scope="row"><img className='item__img' src={image} alt={`Artist ${name}`} /></TableCell>
         <TableCell align="right">{name}</TableCell>
         <TableCell align="right">{genres}</TableCell>
@@ -39,7 +28,8 @@ const Artist = ({data}) => {
 )}
 
 Artist.propTypes = {
-    data: PropTypes.object.isRequired
+    data: PropTypes.object.isRequired,
+    handleDetails: PropTypes.func.isRequired
 }
 
 

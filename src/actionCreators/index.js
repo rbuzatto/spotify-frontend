@@ -9,10 +9,8 @@ import {
     CLEAR_FAVORITE
 } from '../actions/index'
 
-import { BASE_URL } from '../constants/index'
-
 import handleFetchedDataType from '../helpers/handleFetchedDataType'
-import createRequestObject from '../helpers/createRequestObj'
+import createRequestObject from '../helpers/createRequestObject'
 
 export const setSearchType = (payload) => ({
     type: SEARCH_TYPE, 
@@ -54,36 +52,4 @@ export const clearFavorite = ({ favType }) => ({
     type: CLEAR_FAVORITE,
     payload: { favType }
 })
-
-// const id = (d[0].id)
-//         const url = new URL(`${BASE_URL}/artists/${id}/albums?limit=5`)
-// const token = localStorage.getItem('token')
-// const headers = new Headers({"Content-Type": "application/json", "Authorization": `Bearer ${token}`})
-
-// const settings = {
-//   method: 'GET',
-//   headers
-// }
-
-// const request = new Request(url, settings)
-
-// fetch(request)
-//     .then(res => res.json())
-//     .then(data => console.log(data))
-
-// const id = (d[0].id)
-//         const url = new URL(`${BASE_URL}/albums/${id}/tracks`)
-// const token = localStorage.getItem('token')
-// const headers = new Headers({"Content-Type": "application/json", "Authorization": `Bearer ${token}`})
-
-// const settings = {
-//   method: 'GET',
-//   headers
-// }
-
-// const request = new Request(url, settings)
-
-// fetch(request)
-//     .then(res => res.json())
-//     .then(data => console.log(data))
         

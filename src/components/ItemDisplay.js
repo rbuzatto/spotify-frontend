@@ -5,14 +5,14 @@ import Track from './Track'
 import Artist from './Artist'
 import Album from './Album'
 
-const ItemDisplay = ({ data, type }) => {
+const ItemDisplay = ({ data, type, handleDetails }) => {
     
     const SelectProperTag = () => {
         switch (type) {
             case 'artist':
-                return <Artist data={data} />
+                return <Artist data={data} handleDetails={handleDetails} />
             case 'album':
-                return <Album data={data} />
+                return <Album data={data} handleDetails={handleDetails} />
             case 'track':
                 return <Track data={data} />
             default:
@@ -25,7 +25,8 @@ const ItemDisplay = ({ data, type }) => {
 
 ItemDisplay.propTypes = {
     data: PropTypes.object.isRequired,
-    type: PropTypes.string.isRequired
+    type: PropTypes.string.isRequired,
+    handleDetails: PropTypes.func.isRequired
 }
 
 export default ItemDisplay

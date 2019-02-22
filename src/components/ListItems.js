@@ -5,21 +5,22 @@ import { connect } from 'react-redux'
 import ItemDisplay from './ItemDisplay'
 
 
-const ListItems = ({data, type}) => (
+const ListItems = ({data, type, handleDetails}) => (
    <Fragment>
-        { data.slice(0, 8).map(o => <ItemDisplay key={o.id} data={o} type={type} />) }
+        { data.slice(0, 8).map(o => <ItemDisplay key={o.id} data={o} type={type} handleDetails={handleDetails} />) }
    </Fragment>
 
 )
 
 ListItems.propTypes = {
     data: PropTypes.array.isRequired,
-    type: PropTypes.string.isRequired
+    type: PropTypes.string.isRequired,
+    handleDetails: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
     data: state.data.data,
-    type: state.data.type
+    type: state.data.type,
 })
 
 

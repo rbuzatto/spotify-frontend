@@ -8,6 +8,9 @@ import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 
+import { Link as RouterLink } from 'react-router-dom'
+import Link from '@material-ui/core/Link'
+
 const styles = {
   root: {
     flexGrow: 1,
@@ -39,7 +42,10 @@ const NavBar = (props) => {
           <Typography variant="h6" color="inherit" className={classes.grow}>
             Tune<span className={classes.textColor}>In</span> 
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Link component={RouterLink} to="/artists" color="inherit">Artists</Link>
+          <Link component={RouterLink} to="/albums" color="inherit">Albums</Link>
+          <Link component={RouterLink} to="/tracks" color="inherit">Tracks</Link>
+          <Link component={RouterLink} to="/login" color="inherit">Login</Link>
         </Toolbar>
       </AppBar>
     </div>

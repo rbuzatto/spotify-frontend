@@ -1,12 +1,19 @@
 import React, { Component } from 'react'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
-import { connect } from 'react-redux'
+
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom'
 
 import './App.scss'
 
-import Form       from './components/Form'
+
+import Welcome     from './components/Welcome'
 import NavBar     from './components/NavBar'
-import TableItems from './components/TableItems'
+import Login     from './components/Login'
+import DisplayData from './containers/DisplayData'
 
 const theme = createMuiTheme({
   palette: {
@@ -28,7 +35,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    
+
     fetch('http://localhost:4000')
       .then(res => res.json())
       .then(({ token }) => localStorage.setItem('token', token))
@@ -37,45 +44,23 @@ class App extends Component {
 
   render() {
 
-    const {data, type} = this.props
-
     return (
       <MuiThemeProvider theme={theme}>
-        <div className="App">
-          <NavBar />
-          <Form />
-          { data &&  <TableItems /> }
-        </div>
+      
+        <Router>
+          <div className="App">
+            <NavBar />
+            <Route exact path="/" component={Welcome}/>
+            <Route path="/artists" component={DisplayData}/>
+            <Route path="/albums" component={DisplayData}/>
+            <Route path="/tracks" component={DisplayData}/>
+            <Route path="/login" component={Login}/>
+          </div>
+        </Router>
       </MuiThemeProvider>
+
     )
   }
 }
 
-const mapStateToProps = state => ({
-  data : state.data.data,
-  type: state.data.type
-})
-
-export default connect(mapStateToProps, null)(App)
-
-// albums
-// album - albums.items array {found albums}
-// image : images[n].url
-// artists: artists[j].name: if artists.length > 1 "Various Artists"
-// name: name
-// availability: available_markets {array of countries available} - check if contains BR
-
-// artists
-// artist = artists.items array {found artists}
-// image : images[n].url (display first image returned)
-// name: name
-// popularity: popularity (tag >=80 : hot; 60 & 79: cool; 30 & 59 regular; < 30: underground)
-// genres: genres[i] (separated by commmas)
-
-// tracks
-// track: tracks.items array {found tracks}
-// name: name
-// duration: duration ms
-// album img: images[j].url
-// album name: album.name
-// artists: artists[i].name
+export default App

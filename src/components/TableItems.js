@@ -35,7 +35,7 @@ const ArtistHeader = () => (
     </TableRow>
 )
 
-const TableItems = ({data, type}) => {
+const TableItems = ({data, type, handleDetails}) => {
 
     const SelectHeaderTag = () => {
 
@@ -58,7 +58,7 @@ const TableItems = ({data, type}) => {
             { SelectHeaderTag() }
         </TableHead>
         <TableBody>
-            <ListItems/>    
+            <ListItems handleDetails={handleDetails} />    
         </TableBody>
     </Table>
         )
@@ -72,7 +72,8 @@ const mapStateToProps = state => ({
 
 TableItems.propTypes = {
     data: PropTypes.array.isRequired,
-    type: PropTypes.string.isRequired
+    type: PropTypes.string.isRequired,
+    handleDetails: PropTypes.func
 }
 
 export default connect(mapStateToProps, null)(TableItems)

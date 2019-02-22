@@ -4,26 +4,17 @@ import PropTypes from 'prop-types'
 import TableCell from '@material-ui/core/TableCell'
 import TableRow from '@material-ui/core/TableRow'
 
+const Album = ({data, handleDetails}) => {
+    const { image, name, artist, availability } = data
 
-import createRequestObject from '../helpers/createRequestObj'
-
-function fetchAlbumsTracks(id) {
-    
-    const request = createRequestObject({
+    const config = {
+        id: data.id,
         mainRoute: 'albums',
         secondRoute: 'tracks',
-        id 
-    })
+    }
 
-    fetch(request)
-        .then(res => res.json())
-        .then(data => console.log(data))
-}
-
-const Album = ({data}) => {
-    const { image, name, artist, availability } = data
     return (
-    <TableRow onClick={() => fetchAlbumsTracks(data.id)}>
+    <TableRow onClick={() => handleDetails(config)}>
         <TableCell  component="th" scope="row">
             <img className='item__img' src={image} alt={`Cover Album for ${name}`} />
         </TableCell>
@@ -35,7 +26,8 @@ const Album = ({data}) => {
 }
 
 Album.propTypes = {
-    data: PropTypes.object.isRequired
+    data: PropTypes.object.isRequired,
+    handleDetails: PropTypes.func.isRequired
 }
 
 export default Album
