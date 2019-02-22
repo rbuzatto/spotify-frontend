@@ -12,6 +12,7 @@ import {
 import { BASE_URL } from '../constants/index'
 
 import handleFetchedDataType from '../helpers/handleFetchedDataType'
+import createRequestObject from '../helpers/createRequestObj'
 
 export const setSearchType = (payload) => ({
     type: SEARCH_TYPE, 
@@ -26,17 +27,12 @@ export const setSearchField = (payload) => ({
 export const getData = ({query, type}) => dispatch => {
     dispatch({ type: REQUEST_PENDING })
 
-    const url = new URL(`${BASE_URL}/search?q=${query}&type=${type}`)
-    const token = localStorage.getItem('token')
-
-    const headers = new Headers({"Content-Type": "application/json", "Authorization": `Bearer ${token}`})
-
-    const settings = {
-      method: 'GET',
-      headers
-    }
-
-    const request = new Request(url, settings)
+    const request = createRequestObject({
+        qParams: {
+            q : query,
+            type
+        }
+    })
 
     fetch(request)
         .then(res => res.json())
