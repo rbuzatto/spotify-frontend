@@ -10,13 +10,15 @@ import MenuIcon from '@material-ui/icons/Menu'
 import { Link as RouterLink } from 'react-router-dom'
 import Link from '@material-ui/core/Link'
 
-const styles = {
+const styles = theme => ({
   root: {
-    flexGrow: 1,
     position: 'relative',
     top: 0,
     width: '100vw',
-    height: '100px'
+    height: '56px',
+    [theme.breakpoints.up('sm')]: {
+      height: '64px',
+    }
   },
   grow: {
     flexGrow: 1,
@@ -35,7 +37,7 @@ const styles = {
       color: 'yellow'
     },
   },
-}
+})
 
 const NavBar = (props) => {
   const { classes } = props
@@ -49,9 +51,9 @@ const NavBar = (props) => {
           <Typography variant="h6" color="inherit" className={classes.grow}>
             Tune<span className={classes.textColor}>In</span> 
           </Typography>
-          <Link component={RouterLink} className={classes.menuLink} to="/artists" color="inherit">Artists</Link>
-          <Link component={RouterLink} className={classes.menuLink} to="/albums" color="inherit">Albums</Link>
-          <Link component={RouterLink} className={classes.menuLink} to="/tracks" color="inherit">Tracks</Link>
+          <Link component={RouterLink} className={classes.menuLink} to="/search/artist" color="inherit">Artists</Link>
+          <Link component={RouterLink} className={classes.menuLink} to="/search/album" color="inherit">Albums</Link>
+          <Link component={RouterLink} className={classes.menuLink} to="/search/track" color="inherit">Tracks</Link>
           <Link component={RouterLink} className={classes.menuLink} to="/login" color="inherit">Login</Link>
         </Toolbar>
       </AppBar>

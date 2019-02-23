@@ -2,12 +2,20 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
+import {
+    BrowserRouter as Router,
+    Route,
+    Link,
+    Redirect,
+    withRouter
+  } from "react-router-dom"
+
 import Form       from '../components/Form'
 import TableItems from '../components/TableItems'
 import DetailsSelected from '../components/DetailsSelected'
 
+import { types } from '../constants'
 import createRequestObject from '../helpers/createRequestObject'
-
 class DisplayData extends Component {
 
     state = {
@@ -32,6 +40,11 @@ class DisplayData extends Component {
     }
 
     render() {
+        const { type } = this.props.match.params
+        if (!types.includes(type)) {
+            return  <Redirect to='/' />
+        }
+
         return (
             <div>
                 <Form />

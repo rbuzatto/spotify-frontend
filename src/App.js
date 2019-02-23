@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import CssBaseline from '@material-ui/core/CssBaseline'
 
 import {
   BrowserRouter as Router,
@@ -36,7 +37,7 @@ class App extends Component {
 
   componentDidMount() {
 
-    fetch('http://localhost:4000')
+    fetch('http://localhost:3001')
       .then(res => res.json())
       .then(({ token }) => localStorage.setItem('token', token))
       .catch(err => console.log(err))
@@ -47,15 +48,16 @@ class App extends Component {
     return (
       <MuiThemeProvider theme={theme}>
       
+        <CssBaseline/>
         <Router>
-          <div className="App">
+          <React.Fragment>
             <NavBar />
+          <div className="App">
             <Route exact path="/" component={Welcome}/>
-            <Route path="/artists" component={DisplayData}/>
-            <Route path="/albums" component={DisplayData}/>
-            <Route path="/tracks" component={DisplayData}/>
             <Route path="/login" component={Login}/>
+            <Route path="/search/:type" component={DisplayData}/>
           </div>
+          </React.Fragment>
         </Router>
       </MuiThemeProvider>
 
