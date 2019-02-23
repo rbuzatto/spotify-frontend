@@ -4,7 +4,6 @@ import { withStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
-import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 
@@ -14,9 +13,10 @@ import Link from '@material-ui/core/Link'
 const styles = {
   root: {
     flexGrow: 1,
-    position: 'fixed',
+    position: 'relative',
     top: 0,
     width: '100vw',
+    height: '100px'
   },
   grow: {
     flexGrow: 1,
@@ -27,6 +27,13 @@ const styles = {
   },
   textColor : {
     color: 'yellow'
+  },
+  menuLink : {
+    marginLeft: 12,
+    '&:hover': {
+      textDecoration: 'none',
+      color: 'yellow'
+    },
   },
 }
 
@@ -42,10 +49,10 @@ const NavBar = (props) => {
           <Typography variant="h6" color="inherit" className={classes.grow}>
             Tune<span className={classes.textColor}>In</span> 
           </Typography>
-          <Link component={RouterLink} to="/artists" color="inherit">Artists</Link>
-          <Link component={RouterLink} to="/albums" color="inherit">Albums</Link>
-          <Link component={RouterLink} to="/tracks" color="inherit">Tracks</Link>
-          <Link component={RouterLink} to="/login" color="inherit">Login</Link>
+          <Link component={RouterLink} className={classes.menuLink} to="/artists" color="inherit">Artists</Link>
+          <Link component={RouterLink} className={classes.menuLink} to="/albums" color="inherit">Albums</Link>
+          <Link component={RouterLink} className={classes.menuLink} to="/tracks" color="inherit">Tracks</Link>
+          <Link component={RouterLink} className={classes.menuLink} to="/login" color="inherit">Login</Link>
         </Toolbar>
       </AppBar>
     </div>

@@ -4,7 +4,6 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import {
   BrowserRouter as Router,
   Route,
-  Link
 } from 'react-router-dom'
 
 import './App.scss'
@@ -13,6 +12,7 @@ import './App.scss'
 import Welcome     from './components/Welcome'
 import NavBar     from './components/NavBar'
 import Login     from './components/Login'
+
 import DisplayData from './containers/DisplayData'
 
 const theme = createMuiTheme({

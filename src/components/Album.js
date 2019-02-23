@@ -14,7 +14,7 @@ const Album = ({data, handleDetails}) => {
     }
 
     return (
-    <TableRow onClick={() => handleDetails(config)}>
+    <TableRow hover onClick={() => handleDetails(config)}>
         <TableCell  component="th" scope="row">
             <img className='item__img' src={image} alt={`Cover Album for ${name}`} />
         </TableCell>

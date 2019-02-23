@@ -10,7 +10,7 @@ const Track = ({data}) => {
     const { name, duration, album, artists } = data
     
     return (
-        <TableRow>
+        <TableRow hover>
             <TableCell component="th" scope="row">{name}</TableCell>
             <TableCell align="right">{convertTime(duration)}</TableCell>
             <TableCell align="right">{album}</TableCell>

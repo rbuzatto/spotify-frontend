@@ -19,7 +19,7 @@ const Artist = ({data, handleDetails }) => {
     }
 
     return (
-    <TableRow onClick={() => handleDetails(config)}>
+    <TableRow hover onClick={() => handleDetails(config)}>
         <TableCell  component="th" scope="row"><img className='item__img' src={image} alt={`Artist ${name}`} /></TableCell>
         <TableCell align="right">{name}</TableCell>
         <TableCell align="right">{genres}</TableCell>
