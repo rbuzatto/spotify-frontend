@@ -1,24 +1,27 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import ListSubheader from '@material-ui/core/ListSubheader'
+import Paper from '@material-ui/core/Paper'
+import { withStyles } from '@material-ui/core/styles'
 
 import convertTime from '../helpers/convertTime' 
 
 const convertDate = (date) => date.split('-').reverse().join('/')
 
-const DetailsSelected = ({details, type}) => {
+const DetailsSelected = ({details, type, classes}) => {
 
     const fixLength = (str, len = 50) => str.length > len ? str.slice(0,len) + ' ...' : str
 
     const handleType = () => {
         if (type === 'artist') {
             return details.items.map(data => (
-                <ListItem key={data.id}>
+                <ListItem dense divider key={data.id}
+                
+                className={classes.li}>
                     <ListItemText
                     primary={fixLength(data.name)}
                     secondary={convertDate(data.release_date)}
@@ -27,7 +30,9 @@ const DetailsSelected = ({details, type}) => {
               ))
         } else if(type === 'album') {
             return details.items.map(data => (
-                <ListItem key={data.id}>
+                <ListItem dense divider key={data.id}
+                    className={classes.li}
+                >
                     <ListItemText
                     primary={data.name}
                     secondary={convertTime(data.duration_ms)}
@@ -38,11 +43,14 @@ const DetailsSelected = ({details, type}) => {
     }
 
     return (
-        <List dense={true}
-            subheader={<ListSubheader>{type === 'artist' ? 'Albums': 'Tracks'}</ListSubheader>}
-        >
-            {handleType()}
-        </List>
+        <Paper className={classes.paper}>
+            <List dense
+                className={classes.list}
+                subheader={<ListSubheader>{type === 'artist' ? 'Albums': 'Tracks'}</ListSubheader>}
+            >
+                {handleType()}
+            </List>
+        </Paper>
     )
 }
 
@@ -51,4 +59,19 @@ DetailsSelected.propTypes = {
     type: PropTypes.string.isRequired
 }
 
-export default DetailsSelected
+const styles = () => ({
+    list: {
+    },
+    paper: {
+        marginTop: '3rem',
+        width: '60%',
+        background: '#f1f1f1'
+    },
+    li: {
+        '&:last-child': {
+            border: 'none'
+        }
+    }
+})
+
+export default withStyles(styles)(DetailsSelected)

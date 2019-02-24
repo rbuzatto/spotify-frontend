@@ -18,21 +18,34 @@ class DisplayData extends Component {
 
     state = {
         id: null,
-        details: null
+        details: null,
+        selected: false
     }
 
     fetchDetails = (config) => {
         if(config.id === this.state.id) { return }
 
+        const detailsIds = JSON.parse(localStorage.getItem('detailsIds')) || {}
+
+        // if item is in local storage return it
+        if(detailsIds[config.id]) {
+            return this.setState(() => ({id: config.id, details : detailsIds[config.id], selected: true}))
+        }
+
+        // fetch requested id
         const request = createRequestObject(config)
         fetch(request)
             .then(res => res.json())
-            .then(data => {this.setState(() => ({id: config.id, details : data }))})
+            .then(data => {
+                detailsIds[config.id] = data
+                localStorage.setItem('detailsIds', JSON.stringify(detailsIds))
+                this.setState(() => ({id: config.id, details : data, selected: true}))
+            })
     }
 
     componentDidUpdate(prevProps) {
-        if(this.state.details && prevProps.type !== this.props.type) {
-            this.setState(() => ({ details: null, id: null }))
+        if(this.state.details && prevProps.match.params.type !== this.props.match.params.type) {
+            this.setState(() => ({ details: null, id: null, selected: false }))
         }
 
     }
@@ -49,12 +62,10 @@ class DisplayData extends Component {
             return  <Redirect to='/' />
         }
 
-        // this.props.handleSeachField(type)
-
         return (
             <div className={classes.container}>
                 <Form type={type} />
-                { this.props.data && this.renderResults()  }
+                { this.props.data && !this.state.selected && this.renderResults()  }
                 { this.state.id && <DetailsSelected details={this.state.details} type={this.props.type} /> }
             </div>
         )
@@ -79,7 +90,8 @@ const styles = theme => ({
     container: {
         width: '80%',
         maxWidth: '1080px',
-        margin: '0 auto'
+        margin: '0 auto',
+        marginBottom: '6rem'
     }
 })
 

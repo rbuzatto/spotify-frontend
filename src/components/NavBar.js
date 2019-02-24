@@ -8,7 +8,7 @@ import Typography     from '@material-ui/core/Typography'
 import IconButton     from '@material-ui/core/IconButton'
 import MenuIcon       from '@material-ui/icons/Menu'
 
-import { Link as RouterLink } from 'react-router-dom'
+import { NavLink as RouterLink, withRouter } from 'react-router-dom'
 import Link from '@material-ui/core/Link'
 
 const styles = theme => ({
@@ -42,6 +42,7 @@ const styles = theme => ({
 
 const NavBar = (props) => {
   const { classes, isLoggedIn } = props
+
   return (
     <div className={classes.root}>
       <AppBar>
@@ -52,9 +53,9 @@ const NavBar = (props) => {
           <Typography variant="h6" color="inherit" className={classes.grow}>
             Tune<span className={classes.textColor}>In</span> 
           </Typography>
-          <Link component={RouterLink} className={classes.menuLink} to="/search/artist" color="inherit">Artists</Link>
-          <Link component={RouterLink} className={classes.menuLink} to="/search/album" color="inherit">Albums</Link>
-          <Link component={RouterLink} className={classes.menuLink} to="/search/track" color="inherit">Tracks</Link>
+          <Link component={RouterLink} activeStyle={{ color: '#baf531' }} className={classes.menuLink} to="/search/artist" color="inherit">Artists</Link>
+          <Link component={RouterLink} activeStyle={{ color: '#baf531' }} className={classes.menuLink} to="/search/album" color="inherit">Albums</Link>
+          <Link component={RouterLink} activeStyle={{ color: '#baf531' }} className={classes.menuLink} to="/search/track" color="inherit">Tracks</Link>
           <Link 
             component={RouterLink} 
             className={classes.menuLink} 
@@ -68,10 +69,11 @@ const NavBar = (props) => {
 
 NavBar.propTypes = {
   classes: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
   isLoggedIn: state.user.loggedIn
 })
 
-export default withStyles(styles)(connect(mapStateToProps, null)(NavBar))
+export default withRouter(withStyles(styles)(connect(mapStateToProps, null)(NavBar)))

@@ -80,7 +80,7 @@ TableItems.propTypes = {
 const styles = theme => ({
     table: {
         marginTop: '2rem',
-        width: '70%'
+        width: '60%',
     }
 })
 
