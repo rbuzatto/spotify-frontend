@@ -56,7 +56,8 @@ const DetailsSelected = ({details, type, classes}) => {
 
 DetailsSelected.propTypes = {
     details: PropTypes.object.isRequired,
-    type: PropTypes.string.isRequired
+    type: PropTypes.string.isRequired,
+    classes: PropTypes.object.isRequired
 }
 
 const styles = () => ({

@@ -74,7 +74,8 @@ const mapStateToProps = state => ({
 TableItems.propTypes = {
     data: PropTypes.array.isRequired,
     type: PropTypes.string.isRequired,
-    handleDetails: PropTypes.func
+    handleDetails: PropTypes.func,
+    classes: PropTypes.object.isRequired
 }
 
 const styles = theme => ({

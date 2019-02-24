@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
@@ -129,8 +130,11 @@ class Login extends Component {
             </form>
         )
     }
-
 }
+
+Login.propTypes = {
+    classes: PropTypes.object.isRequired,
+  }
 
 const mapDispatchToProps = dispatch => ({
     login: (username, password) => dispatch(loginUser({ username, password, mode: 'signup' }))

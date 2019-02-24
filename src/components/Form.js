@@ -55,7 +55,8 @@ Form.propTypes = {
     type: PropTypes.string.isRequired,
     filter: PropTypes.string.isRequired,
     handleSubmit: PropTypes.func.isRequired,
-    handleSeachField: PropTypes.func.isRequired
+    handleSeachField: PropTypes.func.isRequired,
+    classes: PropTypes.object.isRequired
 
 } 
 
