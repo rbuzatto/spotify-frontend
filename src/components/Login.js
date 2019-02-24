@@ -1,13 +1,18 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
+import { connect } from 'react-redux'
+
+import { loginUser } from '../actionCreators'
 
 const styles = theme => ({
     container: {
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        position: 'absolute',
+        top: '50%',
+        transform: 'translateY(-50%)'
     },
     button: {
         marginTop: '1rem'
@@ -33,22 +38,8 @@ class Login extends Component {
         e.preventDefault()
         const { username, password } = this.state
 
-        fetch('http://localhost:3001/signup', {
-            method: 'POST',
-            body: JSON.stringify({ username, password }),
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            mode: 'cors'
-        })
-        .then(res => {
-            if(res.ok){
-                return res.json()
-            }
-            throw res.json()
-        })
-        .then(console.log)
-        .catch(console.log)
+        this.props.login(username, password)
+        this.clearState()
     }
 
     clearState = () => {
@@ -132,7 +123,7 @@ class Login extends Component {
                     margin="normal"
                     required
                 />
-                    <Button type="submit" className={classes.button} variant="contained" color="primary" disabled={!valid.username || !valid.password} className={classes.button}>
+                    <Button type="submit" className={classes.button} variant="contained" color="primary" disabled={!valid.username || !valid.password}>
                         Log In
                     </Button>
             </form>
@@ -141,4 +132,8 @@ class Login extends Component {
 
 }
 
-export default withStyles(styles)(Login)
+const mapDispatchToProps = dispatch => ({
+    login: (username, password) => dispatch(loginUser({ username, password, mode: 'signup' }))
+})
+
+export default withStyles(styles)(connect(null, mapDispatchToProps)(Login))

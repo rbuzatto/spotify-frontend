@@ -1,4 +1,4 @@
-import  { BASE_URL } from '../constants/index'
+import  { BASE_URL } from '../constants'
 
 const createRequestObject = (config) => {
     const { mainRoute = 'search', id, qParams , secondRoute } = config

@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-
 import TableCell from '@material-ui/core/TableCell'
 import TableRow from '@material-ui/core/TableRow'
 
@@ -31,7 +30,5 @@ Artist.propTypes = {
     data: PropTypes.object.isRequired,
     handleDetails: PropTypes.func.isRequired
 }
-
-
 
 export default Artist

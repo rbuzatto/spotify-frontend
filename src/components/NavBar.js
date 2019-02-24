@@ -1,11 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { connect }    from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
-import IconButton from '@material-ui/core/IconButton'
-import MenuIcon from '@material-ui/icons/Menu'
+import AppBar         from '@material-ui/core/AppBar'
+import Toolbar        from '@material-ui/core/Toolbar'
+import Typography     from '@material-ui/core/Typography'
+import IconButton     from '@material-ui/core/IconButton'
+import MenuIcon       from '@material-ui/icons/Menu'
 
 import { Link as RouterLink } from 'react-router-dom'
 import Link from '@material-ui/core/Link'
@@ -40,7 +41,7 @@ const styles = theme => ({
 })
 
 const NavBar = (props) => {
-  const { classes } = props
+  const { classes, isLoggedIn } = props
   return (
     <div className={classes.root}>
       <AppBar>
@@ -54,7 +55,11 @@ const NavBar = (props) => {
           <Link component={RouterLink} className={classes.menuLink} to="/search/artist" color="inherit">Artists</Link>
           <Link component={RouterLink} className={classes.menuLink} to="/search/album" color="inherit">Albums</Link>
           <Link component={RouterLink} className={classes.menuLink} to="/search/track" color="inherit">Tracks</Link>
-          <Link component={RouterLink} className={classes.menuLink} to="/login" color="inherit">Login</Link>
+          <Link 
+            component={RouterLink} 
+            className={classes.menuLink} 
+            to={isLoggedIn ? '/logout': '/login'} 
+            color="inherit">{isLoggedIn ? 'Logout': 'Login'}</Link>
         </Toolbar>
       </AppBar>
     </div>
@@ -65,4 +70,8 @@ NavBar.propTypes = {
   classes: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles)(NavBar)
+const mapStateToProps = state => ({
+  isLoggedIn: state.user.loggedIn
+})
+
+export default withStyles(styles)(connect(mapStateToProps, null)(NavBar))

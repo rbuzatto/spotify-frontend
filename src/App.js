@@ -3,7 +3,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 
 import {
-  BrowserRouter as Router,
+  Router,
   Route,
 } from 'react-router-dom'
 
@@ -13,8 +13,11 @@ import './App.scss'
 import Welcome     from './components/Welcome'
 import NavBar     from './components/NavBar'
 import Login     from './components/Login'
+import Logout     from './components/Logout'
 
 import DisplayData from './containers/DisplayData'
+import history from './helpers/history'
+import PrivateRoute from './components/PrivateRoute'
 
 const theme = createMuiTheme({
   palette: {
@@ -49,14 +52,15 @@ class App extends Component {
       <MuiThemeProvider theme={theme}>
       
         <CssBaseline/>
-        <Router>
+        <Router history={history}>
           <React.Fragment>
             <NavBar />
-          <div className="App">
-            <Route exact path="/" component={Welcome}/>
-            <Route path="/login" component={Login}/>
-            <Route path="/search/:type" component={DisplayData}/>
-          </div>
+            <div className="App">
+              <Route exact path="/" component={Welcome}/>
+              <Route path="/login" component={Login}/>
+              <Route path="/logout" component={Logout}/>
+              <PrivateRoute path="/search/:type" component={DisplayData}/>
+            </div>
           </React.Fragment>
         </Router>
       </MuiThemeProvider>

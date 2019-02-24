@@ -2,17 +2,15 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import {
-    BrowserRouter as Router,
-    Route,
-    Link,
-    Redirect,
-    withRouter
-  } from "react-router-dom"
+import { Redirect } from "react-router-dom"
+
+  
+import { withStyles } from '@material-ui/core/styles'
 
 import Form       from '../components/Form'
 import TableItems from '../components/TableItems'
 import DetailsSelected from '../components/DetailsSelected'
+import { setSearchField } from '../actionCreators/index'
 
 import { types } from '../constants'
 import createRequestObject from '../helpers/createRequestObject'
@@ -39,16 +37,24 @@ class DisplayData extends Component {
 
     }
 
+    renderResults = () => {
+        return this.props.data.length ? <TableItems handleDetails={this.fetchDetails} type={this.props.type}/> : <div>Sorry, No Matches Found</div>
+    }
+
     render() {
         const { type } = this.props.match.params
+        const { classes } = this.props
+
         if (!types.includes(type)) {
             return  <Redirect to='/' />
         }
 
+        // this.props.handleSeachField(type)
+
         return (
-            <div>
-                <Form />
-                { this.props.data && <TableItems handleDetails={this.fetchDetails} /> }
+            <div className={classes.container}>
+                <Form type={type} />
+                { this.props.data && this.renderResults()  }
                 { this.state.id && <DetailsSelected details={this.state.details} type={this.props.type} /> }
             </div>
         )
@@ -65,4 +71,16 @@ const mapStateToProps = state => ({
     type: state.data.type
   })
 
-export default  connect(mapStateToProps, null)(DisplayData)
+  const mapDispatchToProps = (dispatch, ownProps) => ({
+    handleSeachField: type => dispatch(setSearchField(type)),
+})
+
+const styles = theme => ({
+    container: {
+        width: '80%',
+        maxWidth: '1080px',
+        margin: '0 auto'
+    }
+})
+
+export default  withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(DisplayData))

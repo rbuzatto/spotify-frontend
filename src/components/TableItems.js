@@ -7,6 +7,7 @@ import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import TableBody from '@material-ui/core/TableBody'
+import { withStyles } from '@material-ui/core/styles'
 
 import ListItems from './ListItems'
 
@@ -35,7 +36,7 @@ const ArtistHeader = () => (
     </TableRow>
 )
 
-const TableItems = ({data, type, handleDetails}) => {
+const TableItems = ({data, type, handleDetails, classes}) => {
 
     const SelectHeaderTag = () => {
 
@@ -53,7 +54,7 @@ const TableItems = ({data, type, handleDetails}) => {
     }
     return (
         
-    <Table>
+    <Table className={classes.table}>
         <TableHead>
             { SelectHeaderTag() }
         </TableHead>
@@ -76,4 +77,11 @@ TableItems.propTypes = {
     handleDetails: PropTypes.func
 }
 
-export default connect(mapStateToProps, null)(TableItems)
+const styles = theme => ({
+    table: {
+        marginTop: '2rem',
+        width: '70%'
+    }
+})
+
+export default withStyles(styles)(connect(mapStateToProps, null)(TableItems))
