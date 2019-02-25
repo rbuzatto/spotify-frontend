@@ -27,15 +27,15 @@ const Artist = ({data, handleDetails, classes, addFav,removeFav , favorite }) =>
     }
 
     return (
-    <TableRow hover >
+    <TableRow hover className={classes.row}>
         <TableCell  component="th" scope="row">
         <div className={classes.firstCell}>
             <Favorite className={`${classes.icon} ${favorite ? classes.iconFav : ''}`} onClick={favorite ? removeFav: addFav} />
-            <img className='item__img' src={image} alt={`Artist ${name}`} />
+            <img className='item__img' src={image} alt={`Artist ${name}`} onClick={() => handleDetails(config)} />
         </div>
         </TableCell>
         <TableCell align="right" onClick={() => handleDetails(config)}>{name}</TableCell>
-        <TableCell align="right">{genres}</TableCell>
+        <TableCell align="right" onClick={() => handleDetails(config)}>{genres}</TableCell>
         <TableCell align="right">
         <Chip label={popularity} className={`${classes.chip} ${classes[`chip--${popularity}`]}`} /></TableCell>
     </TableRow>
@@ -51,6 +51,9 @@ Artist.propTypes = {
 }
 
 const styles = {
+    row: {
+        cursor: 'pointer'
+    },
     chip: {
         fontWeight: '500',
         fontSize: '10px'

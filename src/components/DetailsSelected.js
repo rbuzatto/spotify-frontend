@@ -6,6 +6,7 @@ import ListItem       from '@material-ui/core/ListItem'
 import ListItemText   from '@material-ui/core/ListItemText'
 import ListSubheader  from '@material-ui/core/ListSubheader'
 import Paper          from '@material-ui/core/Paper'
+import ArrowBackIos from '@material-ui/icons/ArrowBackIos'
 import { withStyles } from '@material-ui/core/styles'
 
 import convertTime from '../helpers/convertTime' 
@@ -13,7 +14,7 @@ import fixLength from '../helpers/fixLength'
 
 const convertDate = (date) => date.split('-').reverse().join('/')
 
-const DetailsSelected = ({details, type, classes, component: Component}) => {
+const DetailsSelected = ({details, type, classes, clearDetails}) => {
 
     const handleType = () => {
 
@@ -44,7 +45,11 @@ const DetailsSelected = ({details, type, classes, component: Component}) => {
         <Paper className={classes.paper}>
             <List dense
                 className={classes.list}
-                subheader={<ListSubheader>{type === 'artist' ? 'Albums': 'Tracks'}</ListSubheader>}
+                subheader={
+                    <ListSubheader className={classes.listHeader}>{type === 'artist' ? 'Albums': 'Tracks'}
+                        <ArrowBackIos className={classes.iconBack} onClick={clearDetails}/>
+                    </ListSubheader>
+                }
             >
                 {handleType()}
             </List>
@@ -55,7 +60,8 @@ const DetailsSelected = ({details, type, classes, component: Component}) => {
 DetailsSelected.propTypes = {
     details: PropTypes.object.isRequired,
     type: PropTypes.string.isRequired,
-    classes: PropTypes.object.isRequired
+    classes: PropTypes.object.isRequired,
+    clearDetails: PropTypes.func.isRequired,
 }
 
 const styles = () => ({
@@ -70,6 +76,17 @@ const styles = () => ({
         '&:last-child': {
             border: 'none'
         }
+    },
+    listHeader: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+    iconBack: {
+        width: '16px',
+        height: '16px',
+        cursor: 'pointer',
+        transition: 'fill .2s linear',
     }
 })
 

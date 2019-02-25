@@ -142,7 +142,11 @@ const styles = theme => ({
         flexDirection: 'column',
         position: 'absolute',
         top: '50%',
-        transform: 'translateY(-50%)'
+        transform: 'translateY(-50%)',
+        background: '#fff',
+        padding: '4rem',
+        borderRadius: '4px',
+        boxShadow: '2px 2px 4px #e0e0e0'
     },
     button: {
         marginTop: '1rem'

@@ -22,15 +22,15 @@ const Album = ({data, handleDetails, classes, addFav,removeFav, favorite}) => {
     }
 
     return (
-    <TableRow hover >
+    <TableRow hover className={classes.row}>
         <TableCell  component="th" scope="row">
             <div className={classes.firstCell}>
                 <Favorite className={`${classes.icon} ${favorite ? classes.iconFav : ''}`} onClick={favorite ? removeFav: addFav} />
-                <img className='item__img' src={image} alt={`Cover Album for ${name}`} />
+                <img className='item__img' src={image} alt={`Cover Album for ${name}`} onClick={() => handleDetails(config)}/>
             </div>
         </TableCell>
         <TableCell align="right" onClick={() => handleDetails(config)}>{name}</TableCell>
-        <TableCell align="right">{artist}</TableCell>
+        <TableCell align="right" onClick={() => handleDetails(config)}>{artist}</TableCell>
         <TableCell align="right">{availability ? 'Yes' : 'No'}</TableCell>
     </TableRow>
     )
@@ -46,6 +46,9 @@ Album.propTypes = {
 }
 
 const styles = ({
+    row: {
+        cursor: 'pointer'
+    },
     icon: {
         fill: '#e4e2e2',
         cursor: 'pointer',

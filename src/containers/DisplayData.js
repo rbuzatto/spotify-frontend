@@ -43,6 +43,10 @@ class DisplayData extends Component {
             })
     }
 
+    clearDetails = () => {
+        this.setState(() => ({ details: null, id: null, selected: false }))
+    }
+
     componentDidUpdate(prevProps) {
         if(this.state.details && prevProps.match.params.type !== this.props.match.params.type) {
             this.setState(() => ({ details: null, id: null, selected: false }))
@@ -66,7 +70,7 @@ class DisplayData extends Component {
             <div className={classes.container}>
                 <Form type={type} />
                 { this.props.data && !this.state.selected && this.renderResults()  }
-                { this.state.id && <DetailsSelected details={this.state.details} type={this.props.type} /> }
+                { this.state.id && <DetailsSelected clearDetails={this.clearDetails} details={this.state.details} type={this.props.type} /> }
             </div>
         )
     }
@@ -91,7 +95,9 @@ const styles = theme => ({
         width: '80%',
         maxWidth: '1080px',
         margin: '0 auto',
-        marginBottom: '6rem'
+        background: '#fff',
+        padding: '0 2rem',
+        flexGrow: '1'
     }
 })
 
