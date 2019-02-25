@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { compose } from 'redux'
 
 import Table from '@material-ui/core/Table'
 import TableCell from '@material-ui/core/TableCell'
@@ -85,4 +86,7 @@ const styles = theme => ({
     }
 })
 
-export default withStyles(styles)(connect(mapStateToProps, null)(TableItems))
+export default compose( 
+    withStyles(styles),
+    (connect(mapStateToProps, null))
+    )(TableItems)

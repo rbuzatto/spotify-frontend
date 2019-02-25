@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+import { connect } from 'react-redux' 
+import { compose } from 'redux'
 
 import { Redirect } from "react-router-dom"
 
@@ -95,4 +96,7 @@ const styles = theme => ({
     }
 })
 
-export default  withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(DisplayData))
+export default compose( 
+    withStyles(styles),
+    (connect(mapStateToProps, mapDispatchToProps))
+    )(DisplayData)

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { connect }    from 'react-redux'
+import { connect }    from 'react-redux'    
+import { compose } from 'redux'
 import { withStyles } from '@material-ui/core/styles'
 import AppBar         from '@material-ui/core/AppBar'
 import Toolbar        from '@material-ui/core/Toolbar'
@@ -158,5 +159,8 @@ const styles = theme => ({
   }
 })
 
-
-export default withRouter(withStyles(styles)(connect(mapStateToProps, null)(NavBar)))
+export default compose(
+  withRouter,
+  withStyles(styles),
+  (connect(mapStateToProps, null))
+  )(NavBar)

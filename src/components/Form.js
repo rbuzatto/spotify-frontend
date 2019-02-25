@@ -1,6 +1,8 @@
 import React          from 'react'
 import PropTypes      from 'prop-types'
 import { connect }    from 'react-redux'
+import { compose }    from 'redux'
+
 import { withStyles } from '@material-ui/core/styles'
 import TextField      from '@material-ui/core/TextField'
 import Button         from '@material-ui/core/Button'
@@ -52,11 +54,11 @@ const Form = (props) => {
 }
 
 Form.propTypes = {
-    type: PropTypes.string.isRequired,
-    filter: PropTypes.string.isRequired,
-    handleSubmit: PropTypes.func.isRequired,
+    type            : PropTypes.string.isRequired,
+    filter          : PropTypes.string.isRequired,
+    handleSubmit    : PropTypes.func.isRequired,
     handleSeachField: PropTypes.func.isRequired,
-    classes: PropTypes.object.isRequired
+    classes         : PropTypes.object.isRequired
 
 } 
 
@@ -66,10 +68,13 @@ const mapStateToProps = ({filter}) => ({
 
 const mapDispatchToProps = dispatch => ({
     handleSeachField: e => dispatch(setSearchField(e.target.value)),
-    handleSubmit:(e, query) => {
+    handleSubmit: (e, query) => {
         e.preventDefault()
         dispatch(getData(query))
     }
 })
 
-export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(Form))
+export default compose( 
+    withStyles(styles),
+    (connect(mapStateToProps, mapDispatchToProps))
+    )(Form)

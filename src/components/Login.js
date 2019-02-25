@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
-import TextField from '@material-ui/core/TextField'
-import Button from '@material-ui/core/Button'
-import { connect } from 'react-redux'
+import PropTypes            from 'prop-types'
+import { connect }          from 'react-redux'
+import { compose }          from 'redux'
+
+import { withStyles }       from '@material-ui/core/styles'
+import TextField            from '@material-ui/core/TextField'
+import Button               from '@material-ui/core/Button'
 
 import { loginUser } from '../actionCreators'
 
@@ -147,5 +149,7 @@ const styles = theme => ({
     }
 })
 
-
-export default withStyles(styles)(connect(null, mapDispatchToProps)(Login))
+export default compose( 
+    withStyles(styles),
+    (connect(null, mapDispatchToProps))
+    )(Login)

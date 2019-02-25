@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 
 import TableCell from '@material-ui/core/TableCell'
-import TableRow from '@material-ui/core/TableRow'
-import Chip from '@material-ui/core/Chip'
+import TableRow  from '@material-ui/core/TableRow'
+import Chip      from '@material-ui/core/Chip'
 
 const Artist = ({data, handleDetails, classes }) => {
     
