@@ -1,20 +1,19 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux' 
-import { compose } from 'redux'
-
-import { Redirect } from "react-router-dom"
-
+import PropTypes            from 'prop-types'
+import { connect }          from 'react-redux' 
+import { compose }          from 'redux'
+import { Redirect }         from "react-router-dom"
   
 import { withStyles } from '@material-ui/core/styles'
 
-import Form       from '../components/Form'
-import TableItems from '../components/TableItems'
+import Form            from '../components/Form'
+import TableItems      from '../components/TableItems'
 import DetailsSelected from '../components/DetailsSelected'
-import { setSearchField } from '../actionCreators/index'
 
+import { setSearchField } from '../actionCreators/index'
 import { types } from '../constants'
 import createRequestObject from '../helpers/createRequestObject'
+
 class DisplayData extends Component {
 
     state = {

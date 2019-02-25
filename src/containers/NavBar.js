@@ -26,47 +26,48 @@ class NavBar extends Component {
   render() {
   const { classes, isLoggedIn } = this.props
 
+  const linksValues = [
+    {
+      to: '/search/artist',
+      display: 'Artists',
+    },
+    {
+      to: '/search/album',
+      display: 'Albums',
+    },
+    {
+      to: '/search/track',
+      display: 'Tracks',
+    },
+    {
+      to: isLoggedIn ? '/logout': '/login',
+      display: isLoggedIn ? 'Logout': 'Login',
+    },
+  ]
+
   return (
     <div className={classes.root}>
       <AppBar>
         <Toolbar>
           <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" onClick={this.handleMenu}>
-           { !this.state.menuOpen ? <Menu/>: <Close/> }
+           { !this.state.menuOpen ? <Menu/> : <Close/> }
           </IconButton>
           <Typography variant="h6" color="inherit" className={classes.grow}>
             Tune<span className={classes.textColor}>In</span> 
           </Typography>
           <div className={`${classes.menuList} ${this.state.menuOpen ? classes.menuListShow : ''}`}>
-            <Link 
-              component={RouterLink} 
-              activeStyle={{ color: '#baf531' }} 
-              style={{ 'transitionDelay': '0' }}
-              className={`${classes.menuLink} ${this.state.menuOpen ? classes.menuLinkShow : ''}`}
-              to="/search/artist" 
-              color="inherit">Artists
-            </Link>
-            <Link 
-              component={RouterLink} 
-              activeStyle={{ color: '#baf531' }} 
-              style={{ 'transitionDelay': '100ms' }}
-              className={`${classes.menuLink} ${this.state.menuOpen ? classes.menuLinkShow : ''}`}
-              to="/search/album" 
-              color="inherit">Albums
-            </Link>
-            <Link 
-              component={RouterLink} 
-              activeStyle={{ color: '#baf531' }} 
-              style={{ 'transitionDelay': '200ms' }}
-              className={`${classes.menuLink} ${this.state.menuOpen ? classes.menuLinkShow : ''}`}
-              to="/search/track" 
-              color="inherit">Tracks
-            </Link>
-            <Link 
-              component={RouterLink} 
-              style={{ 'transitionDelay': '300ms' }}
-              className={`${classes.menuLink} ${this.state.menuOpen ? classes.menuLinkShow : ''}`} 
-              to={isLoggedIn ? '/logout': '/login'} 
-              color="inherit">{isLoggedIn ? 'Logout': 'Login'}</Link>
+            { linksValues.map(({to, display}, idx) => (
+              <Link
+                key         = {idx} 
+                component   = {RouterLink} 
+                activeStyle = {{ color: '#baf531' }} 
+                style       = {{ 'transitionDelay': `${idx*100}` }}
+                className   = {`${classes.menuLink} ${this.state.menuOpen ? classes.menuLinkShow: ''}`}
+                to          = {to} 
+                color       = "inherit">{display}
+              </Link>
+              ))
+            }
           </div>
         </Toolbar>
       </AppBar>
