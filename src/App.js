@@ -23,7 +23,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log(process.env.NODE_ENV)
     fetch(SERVER_URL)
       .then(res => res.json())
       .then(({ token }) => localStorage.setItem('token', token))
