@@ -26,7 +26,6 @@ class App extends Component {
     fetch(SERVER_URL)
       .then(res => res.json())
       .then(({ token }) => localStorage.setItem('token', token))
-      .catch(err => console.log(err))
   }
 
   render() {
