@@ -61,7 +61,7 @@ class NavBar extends Component {
                 key         = {idx} 
                 component   = {RouterLink} 
                 activeStyle = {{ color: '#baf531' }} 
-                style       = {{ 'transitionDelay': `${idx*100}` }}
+                style       = {{ 'transitionDelay': `${idx*100}ms` }}
                 className   = {`${classes.menuLink} ${this.state.menuOpen ? classes.menuLinkShow: ''}`}
                 to          = {to} 
                 color       = "inherit">{display}
