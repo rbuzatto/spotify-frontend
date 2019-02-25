@@ -1,12 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
+import { connect } from 'react-redux'
+import { compose } from 'redux'
 
 import TableCell from '@material-ui/core/TableCell'
 import TableRow  from '@material-ui/core/TableRow'
+import Favorite from '@material-ui/icons/Favorite'
 import Chip      from '@material-ui/core/Chip'
+import { withStyles } from '@material-ui/core/styles'
 
-const Artist = ({data, handleDetails, classes }) => {
+import {
+    addFavorite,
+    removeFavorite } from '../actionCreators'
+
+const Artist = ({data, handleDetails, classes, addFav,removeFav , favorite }) => {
     
     const { name, image, genres, popularity } = data
 
@@ -20,9 +27,14 @@ const Artist = ({data, handleDetails, classes }) => {
     }
 
     return (
-    <TableRow hover onClick={() => handleDetails(config)}>
-        <TableCell  component="th" scope="row"><img className='item__img' src={image} alt={`Artist ${name}`} /></TableCell>
-        <TableCell align="right">{name}</TableCell>
+    <TableRow hover >
+        <TableCell  component="th" scope="row">
+        <div className={classes.firstCell}>
+            <Favorite className={`${classes.icon} ${favorite ? classes.iconFav : ''}`} onClick={favorite ? removeFav: addFav} />
+            <img className='item__img' src={image} alt={`Artist ${name}`} />
+        </div>
+        </TableCell>
+        <TableCell align="right" onClick={() => handleDetails(config)}>{name}</TableCell>
         <TableCell align="right">{genres}</TableCell>
         <TableCell align="right">
         <Chip label={popularity} className={`${classes.chip} ${classes[`chip--${popularity}`]}`} /></TableCell>
@@ -32,7 +44,10 @@ const Artist = ({data, handleDetails, classes }) => {
 Artist.propTypes = {
     data: PropTypes.object.isRequired,
     handleDetails: PropTypes.func.isRequired,
-    classes: PropTypes.object.isRequired
+    classes: PropTypes.object.isRequired,
+    favorite: PropTypes.bool.isRequired,
+    addFav: PropTypes.func.isRequired,
+    removeFav: PropTypes.func.isRequired,
 }
 
 const styles = {
@@ -55,7 +70,35 @@ const styles = {
     'chip--underground': {
         background: 'hsl(0, 0%, 91%)',
         color: 'hsl(0, 0%, 40%)'
+    },
+    icon: {
+        fill: '#e4e2e2',
+        cursor: 'pointer',
+        marginRight: '.6rem',
+        transition: 'fill .2s linear',
+        '&:hover': {
+            fill: '#328c09'
+        }
+    },
+    iconFav: {
+        fill: '#328c09'
+    },
+    firstCell: {
+        display: 'flex',
+        alignItems: 'center'
     }
 }
 
-export default withStyles(styles)(Artist)
+const mapDispatchToProps = (dispatch, { data }) => ({
+    addFav: () => dispatch(addFavorite({data, favType: 'artists'})),
+    removeFav: () => dispatch(removeFavorite({id: data.id, favType: 'artists'}))
+})
+
+const mapStateToProps = (state, { data }) => ({
+    favorite: !!state.favorites.artists[data.id]
+})
+
+export default compose(
+    withStyles(styles),
+    connect(mapStateToProps, mapDispatchToProps)
+    )(Artist)
