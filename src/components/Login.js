@@ -7,19 +7,6 @@ import { connect } from 'react-redux'
 
 import { loginUser } from '../actionCreators'
 
-const styles = theme => ({
-    container: {
-        display: 'flex',
-        flexDirection: 'column',
-        position: 'absolute',
-        top: '50%',
-        transform: 'translateY(-50%)'
-    },
-    button: {
-        marginTop: '1rem'
-    }
-})
-
 class Login extends Component {
 
     state = {
@@ -32,14 +19,14 @@ class Login extends Component {
         valid : {
             username: false,
             password: false
-        }
+        },
+        action: 'login'
     }
 
-    handleSubmit = (e) => {
-        e.preventDefault()
-        const { username, password } = this.state
+    handleSubmit = () => {
+        const { username, password, action } = this.state
 
-        this.props.login(username, password)
+        this.props.login({username, password}, action)
         this.clearState()
     }
 
@@ -92,6 +79,10 @@ class Login extends Component {
 
     }
 
+    handleFormAction = (action) => {
+        this.setState(() => ({ action }), this.handleSubmit)
+    }
+
     render() {
 
         const { classes } = this.props
@@ -124,8 +115,11 @@ class Login extends Component {
                     margin="normal"
                     required
                 />
-                    <Button type="submit" className={classes.button} variant="contained" color="primary" disabled={!valid.username || !valid.password}>
+                    <Button onClick={() => this.handleFormAction('login')} className={classes.button} variant="contained" color="primary" disabled={!valid.username || !valid.password}>
                         Log In
+                    </Button>
+                    <Button onClick={() => this.handleFormAction('signup')} className={classes.button} variant="outlined" color="primary" disabled={!valid.username || !valid.password}>
+                        Sign Up
                     </Button>
             </form>
         )
@@ -137,7 +131,21 @@ Login.propTypes = {
   }
 
 const mapDispatchToProps = dispatch => ({
-    login: (username, password) => dispatch(loginUser({ username, password, mode: 'signup' }))
+    login: ({username, password}, mode) => dispatch(loginUser({ username, password, mode}))
 })
+
+const styles = theme => ({
+    container: {
+        display: 'flex',
+        flexDirection: 'column',
+        position: 'absolute',
+        top: '50%',
+        transform: 'translateY(-50%)'
+    },
+    button: {
+        marginTop: '1rem'
+    }
+})
+
 
 export default withStyles(styles)(connect(null, mapDispatchToProps)(Login))
