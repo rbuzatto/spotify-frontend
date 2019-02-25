@@ -12,6 +12,8 @@ import Login        from './components/Login'
 import Logout       from './components/Logout'
 import PrivateRoute from './components/PrivateRoute'
 
+import { SERVER_URL } from './constants/'
+
 import history from './helpers/history'
 
 class App extends Component {
@@ -21,8 +23,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-
-    fetch('http://localhost:3001')
+    console.log(process.env.NODE_ENV)
+    fetch(SERVER_URL)
       .then(res => res.json())
       .then(({ token }) => localStorage.setItem('token', token))
       .catch(err => console.log(err))
