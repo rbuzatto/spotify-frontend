@@ -5,7 +5,6 @@ import { compose } from 'redux'
 import { withStyles } from '@material-ui/core/styles'
 import AppBar         from '@material-ui/core/AppBar'
 import Toolbar        from '@material-ui/core/Toolbar'
-import Typography     from '@material-ui/core/Typography'
 import IconButton     from '@material-ui/core/IconButton'
 import Close  from  '@material-ui/icons/Close'
 import Menu  from  '@material-ui/icons/Menu'
@@ -52,9 +51,13 @@ class NavBar extends Component {
           <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" onClick={this.handleMenu}>
            { !this.state.menuOpen ? <Menu/> : <Close/> }
           </IconButton>
-          <Typography variant="h6" color="inherit" className={classes.grow}>
+          <Link 
+            variant="h6" 
+            color="inherit" 
+            className={classes.logo} 
+            component= {RouterLink} to={'/'}>
             Tune<span className={classes.textColor}>In</span> 
-          </Typography>
+          </Link>
           <div className={`${classes.menuList} ${this.state.menuOpen ? classes.menuListShow : ''}`}>
             { linksValues.map(({to, display}, idx) => (
               <Link
@@ -94,8 +97,12 @@ const styles = theme => ({
       height: '64px',
     }
   },
-  grow: {
+  logo: {
     flexGrow: 1,
+    '&:hover': {
+      textDecoration: 'none',
+    }
+    
   },
   menuButton: {
     marginLeft: -12,
