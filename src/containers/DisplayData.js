@@ -92,12 +92,15 @@ const mapStateToProps = state => ({
 
 const styles = theme => ({
     container: {
-        width: '80%',
+        width: '100%',
         maxWidth: '1080px',
         margin: '0 auto',
         background: '#fff',
         padding: '0 2rem',
-        flexGrow: '1'
+        flexGrow: '1',
+        [theme.breakpoints.up('tablet')]: {
+            width: '80%',
+        }
     }
 })
 
