@@ -9,37 +9,35 @@ import Paper from '@material-ui/core/Paper'
 import { withStyles } from '@material-ui/core/styles'
 
 import convertTime from '../helpers/convertTime' 
+import fixLength from '../helpers/fixLength' 
 
 const convertDate = (date) => date.split('-').reverse().join('/')
 
-const DetailsSelected = ({details, type, classes}) => {
-
-    const fixLength = (str, len = 50) => str.length > len ? str.slice(0,len) + ' ...' : str
+const DetailsSelected = ({details, type, classes, component: Component}) => {
 
     const handleType = () => {
-        if (type === 'artist') {
-            return details.items.map(data => (
-                <ListItem dense divider key={data.id}
-                
-                className={classes.li}>
-                    <ListItemText
-                    primary={fixLength(data.name)}
-                    secondary={convertDate(data.release_date)}
-                    /> 
-              </ListItem>
-              ))
-        } else if(type === 'album') {
-            return details.items.map(data => (
-                <ListItem dense divider key={data.id}
-                    className={classes.li}
-                >
-                    <ListItemText
-                    primary={data.name}
-                    secondary={convertTime(data.duration_ms)}
-                    /> 
-              </ListItem>
-              ))
+
+        const types = {
+            artist: {
+                primary: ({name}) => fixLength(name),
+                secondary: ({release_date}) =>convertDate(release_date),
+            },
+            album: {
+                primary: ({name}) => name,
+                secondary: ({duration_ms}) => convertTime(duration_ms),
+            }
         }
+        return details.items.map(data => (
+                <ListItem  
+                    dense divider 
+                    key={data.id}
+                    className={classes.li}>
+                    <ListItemText
+                    primary={types[type].primary(data)}
+                    secondary={types[type].secondary(data)}
+                    /> 
+                </ListItem>
+            ))
     }
 
     return (

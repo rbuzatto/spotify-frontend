@@ -36,12 +36,34 @@ class NavBar extends Component {
             Tune<span className={classes.textColor}>In</span> 
           </Typography>
           <div className={`${classes.menuList} ${this.state.menuOpen ? classes.menuListShow : ''}`}>
-            <Link component={RouterLink} activeStyle={{ color: '#baf531' }} className={classes.menuLink} to="/search/artist" color="inherit">Artists</Link>
-            <Link component={RouterLink} activeStyle={{ color: '#baf531' }} className={classes.menuLink} to="/search/album" color="inherit">Albums</Link>
-            <Link component={RouterLink} activeStyle={{ color: '#baf531' }} className={classes.menuLink} to="/search/track" color="inherit">Tracks</Link>
             <Link 
               component={RouterLink} 
-              className={classes.menuLink} 
+              activeStyle={{ color: '#baf531' }} 
+              style={{ 'transitionDelay': '0' }}
+              className={`${classes.menuLink} ${this.state.menuOpen ? classes.menuLinkShow : ''}`}
+              to="/search/artist" 
+              color="inherit">Artists
+            </Link>
+            <Link 
+              component={RouterLink} 
+              activeStyle={{ color: '#baf531' }} 
+              style={{ 'transitionDelay': '100ms' }}
+              className={`${classes.menuLink} ${this.state.menuOpen ? classes.menuLinkShow : ''}`}
+              to="/search/album" 
+              color="inherit">Albums
+            </Link>
+            <Link 
+              component={RouterLink} 
+              activeStyle={{ color: '#baf531' }} 
+              style={{ 'transitionDelay': '200ms' }}
+              className={`${classes.menuLink} ${this.state.menuOpen ? classes.menuLinkShow : ''}`}
+              to="/search/track" 
+              color="inherit">Tracks
+            </Link>
+            <Link 
+              component={RouterLink} 
+              style={{ 'transitionDelay': '300ms' }}
+              className={`${classes.menuLink} ${this.state.menuOpen ? classes.menuLinkShow : ''}`} 
               to={isLoggedIn ? '/logout': '/login'} 
               color="inherit">{isLoggedIn ? 'Logout': 'Login'}</Link>
           </div>
@@ -91,7 +113,10 @@ const styles = theme => ({
     },
     [theme.breakpoints.down('xs')]: {
         padding: '.8rem',
+        opacity:0,
+        transform: 'translateX(-50%)',
         margin:0,
+        background: '#4b675b',
         '&:hover': {
           background: '#102b06'
         },
@@ -101,22 +126,34 @@ const styles = theme => ({
         }
     }
   },
+    menuLinkShow : {
+      [theme.breakpoints.down('xs')]: {
+        opacity: 1,
+        transform: 'translateX(0)',
+        transition: `
+          opacity .3s ease-in,
+          transform .3s ease-in,
+          background .10s linear,
+          color .10s linear
+          `,
+      }
+    }
+  ,
   menuList: {
     [theme.breakpoints.down('xs')]: {
-      position: 'absolute',
+      position: 'fixed',
       flexDirection: 'column',
       top: 50,
       left: 20,
-      background: '#4b675b',
-      borderRadius: '2px',
-      width: '15rem',
-      display: 'none',
-      overflow: 'hidden'
+      borderRadius: '4px',
+      width: '0',
+      display: 'flex',
+      overflow: 'hidden',
     }
   },
   menuListShow: {
     [theme.breakpoints.down('xs')]: {
-      display: 'flex',
+      width: '15rem',
     }
   }
 })

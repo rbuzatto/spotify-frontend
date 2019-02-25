@@ -22,11 +22,32 @@ import PrivateRoute from './components/PrivateRoute'
 const theme = createMuiTheme({
   palette: {
     primary: {
-      light: "#7986cb",
-      main: "#4c4949",
-      dark: "#303f9f",
+      light: '#7986cb',
+      main: '#4c4949',
+      dark: '#303f9f',
     },
+    secondary: {
+      main: '#ffff00'
+    }
   },
+  breakpoints:{
+    keys: [
+      "xs",
+      "mobile",
+      "sm",
+      "md",
+      "lg",
+      "xl",
+    ],
+    values: {
+      xs: 0,
+      mobile: 420,
+      sm: 600,
+      md: 960,
+      lg: 1280,
+      xl: 1920,
+  }
+},
   typography: {
     useNextVariants: true,
   },
