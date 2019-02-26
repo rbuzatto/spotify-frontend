@@ -120,7 +120,7 @@ class Login extends Component {
                 />
                 <span className={classes.fieldInfo}>Required 8 chars with letter and number</span>
                     <Button onClick={() => this.handleFormAction('login')} className={classes.button} variant="contained" color="primary" disabled={!valid.username || !valid.password}>
-                        Log In
+                        Login
                     </Button>
                     <Button onClick={() => this.handleFormAction('signup')} className={classes.button} variant="outlined" color="primary" disabled={!valid.username || !valid.password}>
                         Sign Up
