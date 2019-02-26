@@ -9,20 +9,6 @@ import Button         from '@material-ui/core/Button'
 
 import { setSearchField, getData } from '../actionCreators/index'
 
-const styles = theme => ({
-    form: {
-        display: 'flex',
-        alignItems: 'center',
-        marginTop: '8rem'
-    },
-    textField: {
-        margin: 0
-    },
-    button: {
-        marginLeft: '1rem'
-    }
-})
-
 const Form = (props) => {
 
     const placeholder = {
@@ -71,6 +57,20 @@ const mapDispatchToProps = dispatch => ({
     handleSubmit: (e, query) => {
         e.preventDefault()
         dispatch(getData(query))
+    }
+})
+
+const styles = theme => ({
+    form: {
+        display: 'flex',
+        alignItems: 'center',
+        marginTop: '8rem'
+    },
+    textField: {
+        margin: 0
+    },
+    button: {
+        marginLeft: '1rem'
     }
 })
 

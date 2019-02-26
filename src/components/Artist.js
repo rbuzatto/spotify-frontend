@@ -31,7 +31,7 @@ const Artist = ({data, handleDetails, classes, addFav,removeFav , favorite }) =>
         <TableCell  component="th" scope="row">
         <div className={classes.firstCell}>
             <Favorite className={`${classes.icon} ${favorite ? classes.iconFav : ''}`} onClick={favorite ? removeFav: addFav} />
-            <img className='item__img' src={image} alt={`Artist ${name}`} onClick={() => handleDetails(config)} />
+            <img className={classes.img} src={image} alt={`Artist ${name}`} onClick={() => handleDetails(config)} />
         </div>
         </TableCell>
         <TableCell align="right" onClick={() => handleDetails(config)}>{name}</TableCell>
@@ -89,6 +89,10 @@ const styles = {
     firstCell: {
         display: 'flex',
         alignItems: 'center'
+    },
+    img: {
+        width: '5rem',
+        height: '5rem'
     }
 }
 
