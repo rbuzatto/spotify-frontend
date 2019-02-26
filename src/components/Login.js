@@ -104,6 +104,7 @@ class Login extends Component {
                     margin="normal"
                     required
                 />
+                <span className={classes.fieldInfo}>Required 3 characters</span>
                 <TextField
                     error={ touched.password && !valid.password }
                     id="std-password"
@@ -117,6 +118,7 @@ class Login extends Component {
                     margin="normal"
                     required
                 />
+                <span className={classes.fieldInfo}>Required 8 chars with letter and number</span>
                     <Button onClick={() => this.handleFormAction('login')} className={classes.button} variant="contained" color="primary" disabled={!valid.username || !valid.password}>
                         Log In
                     </Button>
@@ -149,7 +151,15 @@ const styles = theme => ({
         boxShadow: '2px 2px 4px #e0e0e0'
     },
     button: {
-        marginTop: '1rem'
+        marginTop: '1rem',
+        '&:first-of-type': {
+            marginTop: '2rem'
+        }
+    },
+    fieldInfo: {
+        fontSize: '.75rem',
+        color: '#a0a0a0',
+        fontStyle: 'italic'
     }
 })
 
