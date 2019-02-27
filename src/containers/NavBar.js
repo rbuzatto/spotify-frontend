@@ -22,8 +22,15 @@ class NavBar extends Component {
    this.setState(({menuOpen }) =>({ menuOpen: !menuOpen }))
   }
 
+  closeMenu = () => {
+    if(this.state.menuOpen) {
+      this.setState(() => ({ menuOpen : false}))
+    }
+  }
+
   render() {
   const { classes, isLoggedIn } = this.props
+  const { menuOpen } = this.state
 
   const linksValues = [
     {
@@ -49,7 +56,7 @@ class NavBar extends Component {
       <AppBar>
         <Toolbar>
           <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" onClick={this.handleMenu}>
-           { !this.state.menuOpen ? <Menu/> : <Close/> }
+           { !menuOpen ? <Menu/> : <Close/> }
           </IconButton>
           <Link 
             variant="h6" 
@@ -58,14 +65,15 @@ class NavBar extends Component {
             component= {RouterLink} to={'/'}>
             Tune<span className={classes.textColor}>In</span> 
           </Link>
-          <div className={`${classes.menuList} ${this.state.menuOpen ? classes.menuListShow : ''}`}>
+          <div className={`${classes.menuList} ${menuOpen ? classes.menuListShow : ''}`}>
             { linksValues.map(({to, display}, idx) => (
               <Link
                 key         = {idx} 
-                component   = {RouterLink} 
+                component   = {RouterLink}
+                onClick     = {this.closeMenu} 
                 activeStyle = {{ color: '#baf531' }} 
                 style       = {{ 'transitionDelay': `${idx*100}ms` }}
-                className   = {`${classes.menuLink} ${this.state.menuOpen ? classes.menuLinkShow: ''}`}
+                className   = {`${classes.menuLink} ${menuOpen ? classes.menuLinkShow: ''}`}
                 to          = {to} 
                 color       = "inherit">{display}
               </Link>
