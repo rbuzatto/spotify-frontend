@@ -61,15 +61,17 @@ class DisplayData extends Component {
     render() {
         const { type } = this.props.match.params
         const { classes } = this.props
-
         if (!types.includes(type)) {
             return  <Redirect to='/' />
         }
 
+        // if below is false, route's changed and fetched results should not be displayed
+        const routeEqualsFetched = type === this.props.type
+
         return (
             <div className={classes.container}>
                 <Form type={type} />
-                { this.props.data && !this.state.selected && this.renderResults()  }
+                { this.props.data && !this.state.selected && routeEqualsFetched && this.renderResults()  }
                 { this.state.id && <DetailsSelected clearDetails={this.clearDetails} details={this.state.details} type={this.props.type} /> }
             </div>
         )
