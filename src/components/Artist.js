@@ -79,10 +79,15 @@ const styles = {
         cursor: 'pointer',
         marginRight: '.6rem',
         transition: 'fill .2s linear',
-        '&:hover': {
-            fill: '#328c09'
-        }
     },
+    '@media (hover: hover)': {
+        icon: {
+            '&:hover': {
+                fill: '#328c09'
+            }
+        }
+    }
+    ,
     iconFav: {
         fill: '#328c09'
     },
