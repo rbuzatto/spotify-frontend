@@ -41,6 +41,7 @@ const handleFetchedDataType = (data, type) => {
             name    : track.name,
             id      : track.id,
             duration: track.duration_ms,
+            image   : track.album[0].url,
             album   : track.album.name,
             artists : track.artists.map( o => o.name).join(', ')
 
