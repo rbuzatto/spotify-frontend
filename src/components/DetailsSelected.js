@@ -28,17 +28,26 @@ const DetailsSelected = ({details, type, classes, clearDetails}) => {
                 secondary: ({duration_ms}) => convertTime(duration_ms),
             }
         }
-        return details.items.map(data => (
-                <ListItem  
-                    dense divider 
-                    key={data.id}
+        
+        return details.items ? 
+            (details.items.map(data => (
+                    <ListItem  
+                        dense divider 
+                        key={data.id}
+                        className={classes.li}>
+                        <ListItemText
+                        primary={types[type].primary(data)}
+                        secondary={types[type].secondary(data)}
+                        /> 
+                    </ListItem>
+                )))
+                : (<ListItem  
+                    dense divider
                     className={classes.li}>
                     <ListItemText
-                    primary={types[type].primary(data)}
-                    secondary={types[type].secondary(data)}
+                    primary={'No Data Found'}
                     /> 
-                </ListItem>
-            ))
+                </ListItem>)
     }
 
     return (

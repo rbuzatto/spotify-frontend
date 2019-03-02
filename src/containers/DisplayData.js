@@ -55,7 +55,7 @@ class DisplayData extends Component {
     }
 
     renderResults = () => {
-        return this.props.data.length ? <TableItems handleDetails={this.fetchDetails} type={this.props.type}/> : <div>Sorry, No Matches Found</div>
+        return this.props.data.length ? <TableItems handleDetails={this.fetchDetails} type={this.props.type}/> : <div className={this.props.classes.nomatch}>Sorry, No Matches Found</div>
     }
 
     render() {
@@ -100,9 +100,13 @@ const styles = theme => ({
         background: '#fff',
         padding: '0 2rem',
         flexGrow: '1',
-        [theme.breakpoints.up('tablet')]: {
+        [theme.breakpoints.up('md')]: {
             width: '80%',
-        }
+        },
+    },
+    nomatch: {
+        fontStyle: 'italic',
+        marginTop: '1rem'
     }
 })
 
