@@ -22,26 +22,26 @@ import ListItems from './ListItems'
 const AlbumHeader = ({setClasses}) => (
     <TableRow>
         <TableCell>Cover</TableCell>
-        <TableCell align="right">Album</TableCell>
-        <TableCell className={setClasses(0)} align="right">Artist</TableCell>
-        <TableCell className={setClasses(1)} align="right">Availability</TableCell>
+        <TableCell align="left">Album</TableCell>
+        <TableCell className={setClasses(0)} align="left">Artist</TableCell>
+        <TableCell className={setClasses(1)} align="left">Availability</TableCell>
     </TableRow>
 )
 const TrackHeader = ({setClasses}) => (
     <TableRow>
         <TableCell>Cover</TableCell>
-        <TableCell align="right">Name</TableCell>
-        <TableCell className={setClasses(0)} align="right">Duration</TableCell>
-        <TableCell className={setClasses(1)} align="right">Album</TableCell>
-        <TableCell className={setClasses(2)} align="right">Artists</TableCell>
+        <TableCell align="left">Name</TableCell>
+        <TableCell className={setClasses(0)} align="left">Duration</TableCell>
+        <TableCell className={setClasses(1)} align="left">Album</TableCell>
+        <TableCell className={setClasses(2)} align="left">Artists</TableCell>
     </TableRow>
 )
 const ArtistHeader = ({setClasses}) => (
     <TableRow>
         <TableCell>Cover</TableCell>
-        <TableCell align="right">Artist</TableCell>
-        <TableCell className={setClasses(0)} align="right">Genres</TableCell>
-        <TableCell className={setClasses(1)} align="right">Popularity</TableCell>
+        <TableCell align="left">Artist</TableCell>
+        <TableCell className={setClasses(0)} align="left">Genres</TableCell>
+        <TableCell className={setClasses(1)} align="left">Popularity</TableCell>
     </TableRow>
 )
 

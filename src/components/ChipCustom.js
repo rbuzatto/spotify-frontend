@@ -7,10 +7,13 @@ const ChipCustom = ({ classes, attr }) => (
     <Chip label={attr} className={classNames(classes.chip, classes[`chip--${attr}`] )} />
     )
 
-const styles = {
+const styles = theme => ({
     chip: {
         fontWeight: '500',
-        fontSize: '10px'
+        fontSize: '1rem',
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '.8rem',
+        }
     },
     'chip--hot': {
         background: 'hsl(0, 92%, 92%)',
@@ -28,6 +31,6 @@ const styles = {
         background: 'hsl(0, 0%, 91%)',
         color: 'hsl(0, 0%, 40%)'
     }
-}
+})
 
 export default withStyles(styles)(ChipCustom)
