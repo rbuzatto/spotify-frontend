@@ -21,5 +21,6 @@ Password must contain 8 chars, with one letter and one number
 - authentication
 - data persitence (LocalStorage)
 - host [homeapage](https://boiling-falls-37748.herokuapp.com/)
+- test (redux reducers and action creators)
 
 > This is an ongoing project, new updates are expected to be released shortly.
