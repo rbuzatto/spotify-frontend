@@ -5,7 +5,6 @@ import {
 
 let userFav = JSON.parse(localStorage.getItem('userFav'))
 
-// tenho que colocar ids
 const INITIAL_STATE = userFav ? { userFav } : { 
     tracks: {},
     albums: {},

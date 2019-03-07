@@ -30,13 +30,13 @@ const Row = props => {
          fetchDetails = () => handleDetails(query)
     }
     
-    // handle Component is in case that the value is wrapped inside another component (e.g. ChipCustom)
-    const handleComponents = (prop) => {
-        if(components && components[prop]) {
-            const Tag = components[prop]
-            return <Tag attr={data[prop]} />
+    // handleComponents verifies if a value(data[key]) is rendered wrapped inside another component (e.g. ChipCustom)
+    const handleComponents = (key) => {
+        if(components && components[key]) {
+            const Tag = components[key]
+            return <Tag attr={data[key]} />
         }
-        return data[prop]
+        return data[key]
     }
 
     return (

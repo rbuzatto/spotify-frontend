@@ -38,7 +38,7 @@ export const getData = ({query, type}) => dispatch => {
         }
     })
 
-    fetch(request)
+    return fetch(request)
         .then(res => res.json())
         .then(data => dispatch({ type: REQUEST_SUCCESS, payload: handleFetchedDataType(data, type)}))
         .catch(err => dispatch({ type: REQUEST_FAILED, payload : err}))
