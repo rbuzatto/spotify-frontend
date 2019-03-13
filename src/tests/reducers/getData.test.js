@@ -1,9 +1,9 @@
 import { 
     REQUEST_PENDING,
     REQUEST_SUCCESS,
-    REQUEST_FAILED } from '../../actions'
+    REQUEST_FAILED } from 'actions'
 
-import getData from '../../reducers/getData'
+import getData from 'reducers/getData'
 
 describe('test getData reducer', () => {
     it('should return initial state', () => {

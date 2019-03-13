@@ -1,6 +1,6 @@
-import { SEARCH_TYPE, SEARCH_TEXT } from '../../actions/index'
+import { SEARCH_TYPE, SEARCH_TEXT } from 'actions/index'
 
-import filterSearch from '../../reducers/filterSearch'
+import filterSearch from 'reducers/filterSearch'
 
 describe('test filterSearch reducer', () => {
     it('should return initial state', () => {

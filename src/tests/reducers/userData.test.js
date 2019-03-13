@@ -2,9 +2,9 @@ import {
     LOGIN_PENDING, 
     LOGIN_SUCCESS,
     LOGIN_FAILED,
-    LOGOUT } from '../../actions/index'
+    LOGOUT } from 'actions/index'
 
-import authentication from '../../reducers/userData'
+import authentication from 'reducers/userData'
 
 const user = {
     id: '42435',

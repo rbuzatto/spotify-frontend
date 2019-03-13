@@ -1,9 +1,10 @@
-import * as actionCreators from '../../actionCreators/'
 import configureStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import fetchMock from 'fetch-mock'
-import * as createRequestObject from '../../helpers/createRequestObject'
-import * as handleFetchedDataType from '../../helpers/handleFetchedDataType'
+
+import * as actionCreators from 'actionCreators/'
+import * as createRequestObject from 'helpers/createRequestObject'
+import * as handleFetchedDataType from 'helpers/handleFetchedDataType'
 
 describe('action creators for getData reducers:', function () {
     const middlewares = [thunk]

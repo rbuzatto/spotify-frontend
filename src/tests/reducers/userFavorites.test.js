@@ -1,9 +1,9 @@
 import { 
     ADD_TO_FAVORITE, 
     REMOVE_FROM_FAVORITE,
-    CLEAR_FAVORITE } from '../../actions'
+    CLEAR_FAVORITE } from 'actions'
 
-import userFavorites from '../../reducers/userFavorites'
+import userFavorites from 'reducers/userFavorites'
 
 let state
 

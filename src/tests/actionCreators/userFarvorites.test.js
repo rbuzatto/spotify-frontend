@@ -1,5 +1,5 @@
-import * as actionCreators from '../../actionCreators/'
-import * as actions from '../../actions/'
+import * as actionCreators from 'actionCreators/'
+import * as actions from 'actions/'
 
 describe('action creators for userFavorites reducers:', function () {
 

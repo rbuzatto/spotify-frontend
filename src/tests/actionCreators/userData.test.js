@@ -1,14 +1,14 @@
-import * as actionCreators from '../../actionCreators/'
-import * as actions from '../../actions/'
 import configureStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import fetchMock from 'fetch-mock'
 
-import * as userService from '../../services/userService'
+import * as actionCreators from 'actionCreators/'
+import * as actions from 'actions/'
+import * as userService from 'services/userService'
 
 fetchMock.config.overwriteRoutes = true
 
-jest.mock('../../services/userService')
+jest.mock('services/userService')
 
 
 describe('action creators for userData reducers', function () {
