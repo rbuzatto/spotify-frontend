@@ -2,15 +2,17 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect }    from 'react-redux'    
 import { compose } from 'redux'
-import { withStyles } from '@material-ui/core/styles'
-import AppBar         from '@material-ui/core/AppBar'
-import Toolbar        from '@material-ui/core/Toolbar'
-import IconButton     from '@material-ui/core/IconButton'
-import Close  from  '@material-ui/icons/Close'
-import Menu  from  '@material-ui/icons/Menu'
-
 import { NavLink as RouterLink, withRouter } from 'react-router-dom'
-import Link from '@material-ui/core/Link'
+
+import AppBar            from '@material-ui/core/AppBar'
+import Toolbar           from '@material-ui/core/Toolbar'
+import IconButton        from '@material-ui/core/IconButton'
+import Close             from '@material-ui/icons/Close'
+import Menu              from '@material-ui/icons/Menu'
+import Link              from '@material-ui/core/Link'
+import ClickAwayListener from '@material-ui/core/ClickAwayListener'
+import { withStyles }    from '@material-ui/core/styles'
+
 
 class NavBar extends Component {
 
@@ -19,13 +21,21 @@ class NavBar extends Component {
   }
 
   handleMenu = () => {
-   this.setState(({menuOpen }) =>({ menuOpen: !menuOpen }))
+   this.setState(({ menuOpen }) =>({ menuOpen: !menuOpen }))
   }
 
   closeMenu = () => {
     if(this.state.menuOpen) {
       this.setState(() => ({ menuOpen : false}))
     }
+  }
+
+  handleClickAway = event => {
+    if (this.anchorEl.contains(event.target)) {
+      return
+    }
+    
+    this.setState(() => ({ menuOpen : false}))
   }
 
   render() {
@@ -55,8 +65,18 @@ class NavBar extends Component {
     <div className={classes.root}>
       <AppBar>
         <Toolbar>
-          <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" onClick={this.handleMenu}>
-           { !menuOpen ? <Menu/> : <Close/> }
+          <IconButton
+            buttonRef={node => {
+              this.anchorEl = node
+            }}
+            aria-owns={ menuOpen ? 'menu-list' : undefined}
+            aria-haspopup="true"
+            color="inherit"
+            onClick={this.handleMenu}
+            className={classes.menuButton}
+            aria-label="Menu"
+          >
+             { !menuOpen ? <Menu/> : <Close/> }
           </IconButton>
           <Link 
             variant="h6" 
@@ -65,21 +85,23 @@ class NavBar extends Component {
             component= {RouterLink} to={'/'}>
             Tune<span className={classes.textColor}>In</span> 
           </Link>
-          <div className={`${classes.menuList} ${menuOpen ? classes.menuListShow : ''}`}>
-            { linksValues.map(({to, display}, idx) => (
-              <Link
-                key         = {idx} 
-                component   = {RouterLink}
-                onClick     = {this.closeMenu} 
-                activeStyle = {{ color: '#baf531' }} 
-                style       = {{ 'transitionDelay': `${idx*100}ms` }}
-                className   = {`${classes.menuLink} ${menuOpen ? classes.menuLinkShow: ''}`}
-                to          = {to} 
-                color       = "inherit">{display}
-              </Link>
-              ))
-            }
-          </div>
+          <ClickAwayListener onClickAway={this.handleClickAway}>
+            <div id='menu-list' className={`${classes.menuList} ${menuOpen ? classes.menuListShow : ''}`}>
+              { linksValues.map(({to, display}, idx) => (
+                <Link
+                  key         = {idx} 
+                  component   = {RouterLink}
+                  onClick     = {this.closeMenu} 
+                  activeStyle = {{ color: '#baf531' }} 
+                  style       = {{ 'transitionDelay': `${idx*100}ms` }}
+                  className   = {`${classes.menuLink} ${menuOpen ? classes.menuLinkShow: ''}`}
+                  to          = {to} 
+                  color       = "inherit">{display}
+                </Link>
+                ))
+              }
+            </div>
+          </ClickAwayListener>
         </Toolbar>
       </AppBar>
     </div>

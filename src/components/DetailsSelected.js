@@ -6,6 +6,7 @@ import ListItem       from '@material-ui/core/ListItem'
 import ListItemText   from '@material-ui/core/ListItemText'
 import ListSubheader  from '@material-ui/core/ListSubheader'
 import Paper          from '@material-ui/core/Paper'
+import IconButton     from '@material-ui/core/IconButton'
 import ArrowBackIos from '@material-ui/icons/ArrowBackIos'
 import { withStyles } from '@material-ui/core/styles'
 
@@ -56,7 +57,9 @@ const DetailsSelected = ({details, type, classes, clearDetails}) => {
                 className={classes.list}
                 subheader={
                     <ListSubheader className={classes.listHeader}>{type === 'artist' ? 'Albums': 'Tracks'}
-                        <ArrowBackIos className={classes.iconBack} onClick={clearDetails}/>
+                        <IconButton  color="inherit" aria-label="Menu" onClick={clearDetails}>
+                            <ArrowBackIos className={classes.iconBack} />
+                        </IconButton>
                     </ListSubheader>
                 }
             >
@@ -77,7 +80,7 @@ const styles = () => ({
     list: {
     },
     paper: {
-        marginTop: '3rem',
+        margin: '8rem auto',
         width: '60%',
         background: '#f1f1f1'
     },

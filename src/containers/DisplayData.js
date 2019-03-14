@@ -6,6 +6,7 @@ import { Redirect }         from "react-router-dom"
   
 import { withStyles } from '@material-ui/core/styles'
 
+import Title            from '../components/Title'
 import Form            from '../components/Form'
 import TableItems      from '../components/TableItems'
 import DetailsSelected from '../components/DetailsSelected'
@@ -55,7 +56,9 @@ class DisplayData extends Component {
     }
 
     renderResults = () => {
-        return this.props.data.length ? <TableItems handleDetails={this.fetchDetails} type={this.props.type}/> : <div className={this.props.classes.nomatch}>Sorry, No Matches Found</div>
+        return this.props.data.length 
+            ? <TableItems handleDetails={this.fetchDetails} type={this.props.type}/> 
+            : <div className={this.props.classes.nomatch}>Sorry, No Matches Found</div>
     }
 
     render() {
@@ -70,6 +73,9 @@ class DisplayData extends Component {
 
         return (
             <div className={classes.container}>
+                <div className={classes.imageBox}>
+                </div>
+                <Title type={type} />
                 <Form type={type} />
                 { this.props.data && !this.state.selected && routeEqualsFetched && this.renderResults()  }
                 { this.state.id && <DetailsSelected clearDetails={this.clearDetails} details={this.state.details} type={this.props.type} /> }
@@ -80,7 +86,8 @@ class DisplayData extends Component {
 
 DisplayData.propTypes = {
     data : PropTypes.array,
-    type: PropTypes.string
+    type: PropTypes.string,
+    classes: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
@@ -97,17 +104,34 @@ const styles = theme => ({
         width: '100%',
         maxWidth: '1080px',
         margin: '0 auto',
-        background: '#fff',
+        background: '#f1f1f1',
         padding: '0 2rem',
         flexGrow: '1',
         [theme.breakpoints.up('md')]: {
             width: '80%',
         },
+        position: 'relative'
     },
     nomatch: {
         fontStyle: 'italic',
         marginTop: '1rem'
-    }
+    },
+    imageBox : {
+        position: 'absolute',
+        top: '0%',
+        left: '0%',
+        overflow: 'hidden',
+        width: '100%',
+        height: 450,
+        clipPath: 'polygon(0% 0%, 100% 0, 100% 70%, 50% 100%, 0 70%)',
+        backgroundImage: 'url(../img/landing.jpg)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        filter: 'opacity(.1) grayscale()',
+        [theme.breakpoints.down('xs')]: {
+            clipPath: 'polygon(0% 0%, 100% 0, 100% 70%, 50% 90%, 0 70%)',
+        }
+    },
 })
 
 export default compose( 

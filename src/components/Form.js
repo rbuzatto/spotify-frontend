@@ -64,7 +64,7 @@ const styles = theme => ({
     form: {
         display: 'flex',
         alignItems: 'center',
-        marginTop: '8rem'
+        marginTop: '14rem'
     },
     textField: {
         margin: 0
